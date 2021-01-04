@@ -4,7 +4,8 @@
 ### Working with data from associated entities
 The new Pet form is an example in which one of the inputs is an entity stored in the database. In this case is PetType labeled as Type.
 
-![new pet form with a form error](/home/carlos/universidad/dp1/repo/theory/images/dp1-t8-img01.png)
+![new pet form with a form error](images/dp1-t8-img01.png)
+
 
 The PetType selector requires a converter. Converters allows spring to map each of the PetType names to the corresponding PetType entities stored in the database.
 
@@ -79,7 +80,8 @@ public void initPetBinder(WebDataBinder dataBinder) {
 
 ## Implementing REST APIs with Spring
 A REST API is a service whose interface is provided by the server using the Representational state transfer architectural style.
-![client-server API comunication](/home/carlos/universidad/dp1/repo/theory/images/dp1-t8-img02.png)
+![client-server API comunication](images/dp1-t8-img02.png)
+
 ### REST APIs, the Spring way
 A REST API can be created in Spring using the same Spring MVC approach. We only have to define the controllers that will handle the APIs endpoints as REST controllers.
 
@@ -235,15 +237,17 @@ Now we have to create the corresponding JSP views for each different case we def
 ## Putting it all together
 Taking a look at pets user stories.
 */src/main/java/org/springframework/samples/petclinic/web/ PetController.java* class.
-![PetController code](/home/carlos/universidad/dp1/repo/theory/images/dp1-t8-img03.png)
+![PetController code](images/dp1-t8-img03.png)
+
 Relies on two services:
 * PetService
 * OwnerService
 
 As we need the pet owner details in this controller scope, the `ownerId` is included in the path.
-![alt text](/home/carlos/universidad/dp1/repo/theory/images/dp1-t8-img04.png)
+![alt text](images/dp1-t8-img04.png)
 
 When we hit the *Add New Pet* button the model attribute Owner can be automatically retrieved from the method findOwner defined in the controller. The annotation `@ModelAttribute("owner")` tells spring that said method will return the Owner.
-![alt text](/home/carlos/universidad/dp1/repo/theory/images/dp1-t8-img05.png)
+![alt text](images/dp1-t8-img05.png)
+
 
 
