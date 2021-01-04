@@ -247,7 +247,10 @@ As we need the pet owner details in this controller scope, the `ownerId` is incl
 ![alt text](images/dp1-t8-img04.png)
 
 When we hit the *Add New Pet* button the model attribute Owner can be automatically retrieved from the method findOwner defined in the controller. The annotation `@ModelAttribute("owner")` tells spring that said method will return the Owner.
-![alt text](images/dp1-t8-img05.png)
+![initCreationForm](images/dp1-t8-img05.png)
 
+We need to be able validate the Pet received from the view. At a Service-level, exceptions might be thrown so we need to catch them. At the Controller-level we catch those exceptions and provide a meaningful error message to the end user.
+
+![savePet](images/dp1-t8-img06.png)
 
 
