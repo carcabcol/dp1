@@ -220,7 +220,7 @@ public String handleError(HttpServletRequest request) {
 ### Custom error pages
 Now we have to create the corresponding JSP views for each different case we defined in the controller.
 
-```html
+```jsp
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
