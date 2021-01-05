@@ -180,18 +180,22 @@ Luckily, Prof. Jose Antonio Parejo has implemented a generic JSON serializer/des
 ```
 
 ## Error handling
+Original source: [Customize Whitelabel Error Page from Baeldung](https://www.baeldung.com/spring-boot-custom-error-page)
+
 Leaving the default “whitelabel” error handling in Spring is not very professional.
 
 To disable it we have to edit the */petclinic/src/main/resources/ application.properties* file.
 
-```java properties
+```java
 server.error.whitelabel.enabled=false
+
+server.error.path=/error
 ```
 This way the “whitelabel” error page is no longer displayed and we need to treat errors ourselves.
 ### Custom error controllers
 We have to create a controller implementing the `ErrorController` interface.
 
-The only mandatory method is `getErrorPath`, which states the URL path to call when there is an error in the request. **This is deprecated in newer versions and the `server.error.path` property should be used instead.**
+The only mandatory method is `getErrorPath`, which states the URL path to call when there is an error in the request. However, starting from Spring Boot version 2.3.x this method is ignored and only remains as legacy **As `getErrorPath` is deprecated the `server.error.path` property should be used instead.**
 
 ```java
 @Controller
