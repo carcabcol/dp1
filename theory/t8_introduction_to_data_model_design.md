@@ -1,5 +1,7 @@
 # T8 Introduction to Data Model Design
+Made by Carlos Manuel Cabello
 
+Github: [carcabcol](https://github.com/carcabcol)
 ## Enhancing views
 ### Working with data from associated entities
 The new Pet form is an example in which one of the inputs is an entity stored in the database. In this case is PetType labeled as Type.
@@ -222,7 +224,7 @@ public String handleError(HttpServletRequest request) {
 ### Custom error pages
 Now we have to create the corresponding JSP views for each different case we defined in the controller.
 
-```jsp
+```html
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
@@ -232,6 +234,58 @@ Now we have to create the corresponding JSP views for each different case we def
 	<h2>There is no page here!</h2>
 	<p>We're sorry, but the page you requested is not available in Petclinic.</p>
 </petclinic:layout>
+```
+
+### Troubleshooting
+For [gii-is-DP1/spring-petclinic](https://github.com/gii-is-DP1/spring-petclinic) particular project, even after following all steps we might get the next error on the console:
+
+```log
+***************************
+APPLICATION FAILED TO START
+***************************
+Description:
+Field errorController in org.springframework.samples.petclinic.configuration.ExceptionHandlerCo
+nfiguration required a bean of type 'org.springframework.boot.autoconfigure.web.servlet.error.B
+asicErrorController' that could not be found.
+
+...
+
+The following candidates were found but could not be injected:
+	- Bean method 'basicErrorController' in 'ErrorMvcAutoConfiguration' not loaded because @Con
+ditionalOnBean (types: org.springframework.boot.web.servlet.error.ErrorController; SearchStrate
+gy: current) found beans of type 'org.springframework.boot.web.servlet.error.ErrorController' c
+ustomErrorController
+```
+
+The relevant part is `Bean method 'basicErrorController'` ... `not loaded because `... `found beans of type 'org.springframework.boot.web.servlet.error.ErrorController' customErrorController `.
+
+The `BasicErrorController` is injected as default. Whenever there is some controller that implements the `ErrorController` interface the `BasicErrorController` is ommited.
+
+![new pet form with a form error](images/dp1-t08-custom-error-handling-diagram.png)
+
+[Custom Error Handling in REST Controllers with Spring Boot](https://thepracticaldeveloper.com/custom-error-handling-rest-controllers-spring-boot/)
+
+The problem is that there is a configuration class that explicitely injects the `BasicErrorController` and expect it to always be available. The path to that class is
+*src/main/java/org/springframework/samples/petclinic/configuration/ ExceptionHandlerConfiguration.java*. **We need to declare
+the `errorController` variable as our `CustomErrorController` class.**
+
+```java
+package org.springframework.samples.petclinic.configuration;
+...
+
+@ControllerAdvice
+public class ExceptionHandlerConfiguration {
+
+	/** Before
+	@Autowired
+	private BasicErrorController errorController;
+	**/
+
+	/** After **/
+	@Autowired
+	private CustomErrorController errorController;
+	...
+}
 ```
 
 ## Putting it all together
@@ -252,5 +306,3 @@ When we hit the *Add New Pet* button the model attribute Owner can be automatica
 We need to be able validate the Pet received from the view. At a Service-level, exceptions might be thrown so we need to catch them. At the Controller-level we catch those exceptions and provide a meaningful error message to the end user.
 
 ![savePet](images/dp1-t8-img06.png)
-
-
