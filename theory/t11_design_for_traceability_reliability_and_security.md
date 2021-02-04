@@ -1,5 +1,11 @@
 # T11 Design for traceability, reliability, and security
 
+Made by Carlos Manuel Cabello
+
+Github: [carcabcol](https://github.com/carcabcol)
+
+------
+
 You have learned how to design and tests software, creating cohesive and loosely coupled components.
 
 ## Software traceability
@@ -113,6 +119,7 @@ public class LoggingController {
 #### Hierarchy of Loggers, Filters, and Handlers/Appenders
 Loggers follow a hierchy based on the class name where it's used. The class name is the fully qualified name (packages and class).
 ![Logger hiearchy example](images/dp1-t11-img02.png)
+
 Logs pass on their messages to their parent recursively.
 
 Additional tools:
@@ -178,7 +185,7 @@ More info at [Logback manual](http://logback.qos.ch/manual/index.html):
 
 #### Dinamic logging configuration
 
-Everytime the applications is deployed it also compiles and this is when our logging configuration will take effect. **Is it possible to change the logging configuration on runtime?** Yes, there's an API for it with its HTTP endpoints.
+Every time the application is deployed it also compiles and this is when our logging configuration will take effect. **Is it possible to change the logging configuration on runtime?** Yes, there's an API for it with its HTTP endpoints.
 
 _pom.xml_ (Additional dependency)
 ```xml
@@ -439,6 +446,8 @@ public String processUpdateForm(@Valid Pet pet, BindingResult result,
 ```
 
 ##### Troubleshooting versioning: UNSAVED TRANSIENT ENTITY error
+
+Reference: https://stackoverflow.com/questions/2572566/java-jpa-version-annotation#answer-26731878
 
 After including the _version_ attribute we might find **we can no longer update entities defined in `data.sql` file or create new one through the application**. Hibernate throws an an error when we try to do so.
 

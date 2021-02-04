@@ -2,6 +2,9 @@
 Made by Carlos Manuel Cabello
 
 Github: [carcabcol](https://github.com/carcabcol)
+
+------
+
 ## Enhancing views
 ### Working with data from associated entities
 The new Pet form is an example in which one of the inputs is an entity stored in the database. In this case is PetType labeled as Type.
