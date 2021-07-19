@@ -457,7 +457,7 @@ org.hibernate.action.internal.UnresolvedEntityInsertActions [http-nio-8080-exec-
 
 This is because **entities inserted through the `data.sql` file does not generate _version_ values "automagically"**. When trying to update any entity with `version=null` will result in Hibernate thinking that the entity is not persisted yet, hence the transaction error. **Remember: new entities inserted through Hiberate are set with `version=0` .**
 
-![](/home/carlos/uni/dp1/repo/theory/images/dp1-t11-img05.png)
+![](images/dp1-t11-img05.png)
 
 To solve this, we need to add an annotation to the _version_ attribute so entities inserted through `data.sql` will have `version=0` by default.
 
